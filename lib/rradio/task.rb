@@ -28,7 +28,7 @@ module RRadio
         channel = channels[$2.to_i]
       end 
       unless channel
-        puts "#{channel} does not exit"
+        puts "#{channel} does not exist"
       else
         @player.playRadio channel
         puts channel
