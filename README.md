@@ -4,6 +4,8 @@ Simple client of radiotray ♪♪♪
 
 ## Usage
 
+You can specify channel with number index.
+
 ```
 $ rradio list
 $[00] .977 Classic Rock
@@ -16,7 +18,7 @@ $ rradio play 01
 .977 The Hitz Channel
 ```
 
-See help
+See help.
 
 ```
 Tasks:
@@ -30,6 +32,7 @@ Tasks:
 
 ## Todo
 
+* Gem ?
 * Test ;)
 * Add indicator
 * Task for management of bookmarks
