@@ -6,7 +6,7 @@ require 'dbus'
 
 module RRadio
   class Task < Thor
-    def initialize(args, opts, conf)
+    def initialize(args, opts={}, conf={})
       super(args, opts, conf)
       setup
     end
@@ -37,7 +37,10 @@ module RRadio
     desc 'off', 'Turn off [synonym: stop]'
     map 'stop' => :off
     def off
-      @player.turnOff if playing
+      if name = playing
+        @player.turnOff
+        puts name
+      end
     end
     desc 'show', 'Show radio channel [synonym: current]'
     map 'current' => :show
@@ -70,7 +73,8 @@ module RRadio
        @player.listRadios.first.sort
     end
     def playing
-      @player.getCurrentRadio.first
+      radio = @player.getCurrentRadio
+      radio.first if radio
     end
   end
 end
