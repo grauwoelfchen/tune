@@ -88,7 +88,7 @@ describe RRadio::Task do
         it 'should respond volume down with too big value' do
           @task.volume('up', '99').should eq 5
         end
-        it 'should not renpond with invalid action' do
+        it 'should not respond with invalid action' do
           @task.volume('keep', '5').should eq nil
         end
       end
