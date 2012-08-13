@@ -14,4 +14,9 @@ Gem::Specification.new do |gem|
   gem.name          = "rradio"
   gem.require_paths = ["lib"]
   gem.version       = RRadio::VERSION
+
+  gem.add_dependency 'ruby-dbus'
+  gem.add_dependency 'thor'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'fuubar'
 end
