@@ -2,11 +2,33 @@
 
 Simple client of radiotray ♪♪♪
 
+## Install
+
+```
+$ gem install rradio
+
+or
+
+$ git clone https://github.com/grauwoelfchen/rradio.git
+$ cd rradio
+$ rake build
+$ gem install pkg/rradio-x.x.x.gem
+```
+
+## Require
+
+* dbus
+* radiotray (runtime)
+
 ## Usage
 
 You can specify channel with number index.
 
 ```
+# run radiotray background
+$ radiotray >/dev/null 2>&1 &
+
+# list channels
 $ rradio list
 $[00] .977 Classic Rock
 $[01] .977 The Hitz Channel
@@ -14,6 +36,8 @@ $[02] 181.FM
 $[03] 181.FM Classic Hits
 $[04] 80s Sky.FM
 ...
+
+# start to listen
 $ rradio play 01
 .977 The Hitz Channel
 ```
