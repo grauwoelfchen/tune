@@ -32,7 +32,6 @@ Tasks:
 
 ## Todo
 
-* Gem ?
-* Test ;)
 * Add indicator
-* Task for management of bookmarks
+* Task for management of bookmarks (add, edit, delete)
+* Display current song (possible ??)
