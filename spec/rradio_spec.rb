@@ -95,14 +95,15 @@ describe RRadio::Task do
     end
     context 'when not playing radio' do
       before do
-        @player.stub(:getCurrentRadio).and_return(nil)
+        @player.stub(:getCurrentRadio).and_return(['not playing'])
+        @player.stub(:turnOff).and_return(nil)
       end
       describe ':off action' do
         before do
           @task = RRadio::Task.new ['off']
         end
-        it 'should not respond and display nothing' do
-          $stdout.should_not_receive(:puts)
+        it 'should not respond and display "not playing"' do
+          $stdout.should_receive(:puts).with('not playing')
           @task.off.should eq nil
         end
       end
@@ -110,8 +111,8 @@ describe RRadio::Task do
         before do
           @task = RRadio::Task.new ['show']
         end
-        it 'should not display channel name' do
-          $stdout.should_receive(:puts).with(nil)
+        it 'should display "not playing"' do
+          $stdout.should_receive(:puts).with('not playing')
           @task.show.should eq nil
         end
       end
