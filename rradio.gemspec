@@ -17,6 +17,10 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'ruby-dbus'
   gem.add_dependency 'thor'
+
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'fuubar'
+  # travis
+  gem.add_development_dependency 'rake', '~> 0.9.2.2'
+  gem.add_development_dependency 'rdoc', '~> 3.11'
 end

@@ -1,5 +1,7 @@
 # rradio
 
+[![Build Status](https://secure.travis-ci.org/grauwoelfchen/rradio.png)](http://travis-ci.org/grauwoelfchen/rradio)
+
 Simple client of radiotray ♪♪♪
 
 ## Install
