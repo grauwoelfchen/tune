@@ -7,5 +7,5 @@ notifications:
   email:
     recipients:
       - y.grauwoelfchen@gmail.com
-    on_success: [always]
-    on_failure: [always]
+    on_success: always
+    on_failure: always
