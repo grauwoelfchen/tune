@@ -16,11 +16,15 @@ describe RRadio::Task do
   end
   context 'when radiotray has 3 channels' do
     before do
-      @player.stub(:listRadios).and_return([['Jazz', 'R&B', 'Country']])
+      @player.stub(:listRadios).and_return([[
+        'Jazz',   # $[01]
+        'R&B',    # $[02]
+        'Country' # $[03]
+      ]])
     end
     context 'when playing Jazz channel' do
       before do
-        @player.stub(:playRadio).with('Jazz')
+        @player.stub(:playRadio).with(/Jazz|R&B/)
         @player.stub(:getCurrentRadio).and_return(['Jazz'])
         @player.stub(:turnOff).and_return(true)
         @player.stub(:volumeUp).and_return(true)
@@ -44,12 +48,16 @@ describe RRadio::Task do
           @task = RRadio::Task.new ['play']
         end
         it 'should display error with invalid index' do
-          $stdout.should_receive(:puts).with(/does\snot\sexist/).exactly(1).times
-          @task.play('5').should eq nil
+          $stdout.should_receive(:puts).with(/\w?does\snot\sexist$/).exactly(1).times
+          @task.play('05').should eq nil
         end
-        it 'should display channel name' do
-          $stdout.should_receive(:puts).with(/Jazz/).exactly(1).times
-          @task.play('1').should eq nil
+        it 'should display channel name after switch channel' do
+          $stdout.should_receive(:puts).with('R&B').exactly(1).times
+          @task.play('02').should eq nil
+        end
+        it 'should display current channel with no arg' do
+          $stdout.should_receive(:puts).with('Jazz').exactly(1).times
+          @task.play().should eq nil
         end
       end
       describe ':off action' do

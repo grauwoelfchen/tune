@@ -30,11 +30,14 @@ module RRadio
     desc 'play', 'Play radio [synonym: start]'
     map  'start' => :play
     method_options :channel => :string
-    def play channel=nil
+    def play channel=''
       if channel =~ /^(\$*)(\d+)$/
         name = channels[$2.to_i]
-      end 
-      unless name
+      end
+      if channel.empty?
+        # same as `show`
+        puts playing
+      elsif !name
         puts "$#{channel} does not exist"
       else
         @player.playRadio name
