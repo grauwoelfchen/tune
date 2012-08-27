@@ -19,7 +19,11 @@ module RRadio
       var_width = all_names.length.to_s.length
       all_names.each_with_index do |channel, index|
         var = index.to_s.rjust var_width, '0'
-        puts "\033[1;30m$\[#{var}\] \033[1;34m#{channel}"
+        if channel == playing
+          puts "\033[1;30m$\[#{var}\] \033[1;31m#{channel}"
+        else
+          puts "\033[1;30m$\[#{var}\] \033[1;34m#{channel}"
+        end
       end
     end
 
