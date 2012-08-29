@@ -3,8 +3,9 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
+# for testing stdout/stderr.
 module Kernel
-  def self.capture(stream)
+  def capture(stream)
     begin
       stream = stream.to_s
       eval "$#{stream} = StringIO.new"
@@ -16,6 +17,7 @@ module Kernel
     result
   end
 end
+
 describe RRadio::Task do
   before do
     @player = double('player')

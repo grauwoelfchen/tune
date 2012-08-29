@@ -25,17 +25,4 @@ RSpec.configure do |config|
   config.filter_run_excluding :ruby => lambda { |version|
     !(RUBY_VERSION.to_s =~ /^#{version.to_s}/)
   }
-
-  # For testing stdout/stderr. This can support also ruby 1.8
-  def capture(*streams)
-    streams.map!{ |stream| stream.to_s }
-    begin
-      result = StringIO.new
-      streams.each{ |stream| eval("$#{stream} = result") }
-      yield
-    ensure
-      streams.each{ |stream| eval("$#{stream} = #{stream.upcase}") }
-    end
-    result.string
-  end
 end
