@@ -7,6 +7,7 @@
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 $:.unshift File.dirname(__FILE__)
+require 'stringio'
 require 'rradio/task'
 
 RSpec.configure do |config|
@@ -19,4 +20,22 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+
+  # ruby version filter
+  config.filter_run_excluding :ruby => lambda { |version|
+    !(RUBY_VERSION.to_s =~ /^#{version.to_s}/)
+  }
+
+  # For testing stdout/stderr. This can support also ruby 1.8
+  def capture(*streams)
+    streams.map!{ |stream| stream.to_s }
+    begin
+      result = StringIO.new
+      streams.each{ |stream| eval("$#{stream} = result") }
+      yield
+    ensure
+      streams.each{ |stream| eval("$#{stream} = #{stream.upcase}") }
+    end
+    result.string
+  end
 end
