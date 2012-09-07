@@ -1,0 +1,31 @@
+module Autotest::Stumpish
+  @title = File.basename(File.dirname(__FILE__)).upcase + ': '
+  # text color
+  @failure = 1
+  @succeed = 2
+
+  Autotest.add_hook :red do |at|
+    res = extract(at)
+    system "stumpish echo ^#{@failure}*'#{@title}' 'test failed :(\n\n#{res}'"
+    false
+  end
+
+  Autotest.add_hook :green do |at|
+    res = extract(at)
+    system "stumpish echo ^#{@succeed}*'#{@title}' 'test passed :)\n\n#{res}'"
+    false
+  end
+
+  private
+  def self.extract(autotest)
+    lines = autotest.results.gsub(/(\e.*?m)/, '').split("\n")
+    lines.reject!{ |line| !line.match(/\d+\s+(example|test)s?/) }
+    result = ''
+    lines.each do |line|
+      line.scan(/([1-9]\d*)\s(\w+)/) do |number, subject|
+        result << "#{subject}: #{number} "
+      end
+    end
+    result
+  end
+end

@@ -20,6 +20,8 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'fuubar'
+  gem.add_development_dependency 'ZenTest'
+
   # travis
   gem.add_development_dependency 'rake', '~> 0.9.2.2'
   gem.add_development_dependency 'rdoc', '~> 3.11'
