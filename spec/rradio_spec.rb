@@ -1,6 +1,6 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
+require 'stringio'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 # for testing stdout/stderr.

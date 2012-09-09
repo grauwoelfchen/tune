@@ -7,8 +7,8 @@
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 $:.unshift File.dirname(__FILE__)
-require 'stringio'
-require 'rradio/task'
+require 'rspec'
+require 'rradio'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
