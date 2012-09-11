@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'stringio'
+require 'ostruct'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 # for testing stdout/stderr.
@@ -47,7 +48,8 @@ describe RRadio::Task do
         @player.stub(:volumeDown).and_return(true)
       end
       describe ':list action' do
-        let(:task){ RRadio::Task.new ['list'] }
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
+        let(:task){ RRadio::Task.new(['list'], [], conf)  }
         before do
           @stdout = capture(:stdout){ @result = task.list }
         end
@@ -66,7 +68,8 @@ describe RRadio::Task do
       end
       describe ':play action' do
         context 'when invalid index given as argment' do
-          let(:task){ RRadio::Task.new ['play'] }
+          let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+          let(:task){ RRadio::Task.new(['play'], [], conf) }
           before do
             @stdout = capture(:stdout){ @result = task.play('05') }
           end
@@ -80,7 +83,8 @@ describe RRadio::Task do
           end
         end
         context 'when switch channel' do
-          let(:task){ RRadio::Task.new ['play'] }
+          let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+          let(:task){ RRadio::Task.new(['play'], [], conf) }
           before do
             @stdout = capture(:stdout){ @result = task.play('02') }
           end
@@ -94,7 +98,8 @@ describe RRadio::Task do
           end
         end
         context 'when no index given' do
-          let(:task){ RRadio::Task.new ['play'] }
+          let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+          let(:task){ RRadio::Task.new(['play'], [], conf) }
           before do
             @stdout = capture(:stdout){ @result = task.play }
           end
@@ -109,7 +114,8 @@ describe RRadio::Task do
         end
       end
       describe ':off action' do
-        let(:task){ RRadio::Task.new ['off'] }
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
+        let(:task){ RRadio::Task.new(['off'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.off }
         end
@@ -123,10 +129,10 @@ describe RRadio::Task do
         end
       end
       describe ':show action' do
-        let(:task){ RRadio::Task.new ['show'] }
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
+        let(:task){ RRadio::Task.new(['show'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.show }
-          @task = RRadio::Task.new ['show']
         end
         it 'should display channel name' do
           @result.should eq nil
@@ -138,7 +144,8 @@ describe RRadio::Task do
         end
       end
       describe ':volume action' do
-        let(:task){ RRadio::Task.new ['volume'] }
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
+        let(:task){ RRadio::Task.new(['volume'], [], conf) }
         it 'should respond volume up with 1-5' do
           task.volume('up', '1').should eq 1
           task.volume('up', '3').should eq 3
@@ -165,7 +172,8 @@ describe RRadio::Task do
         @player.stub(:turnOff).and_return(nil)
       end
       describe ':off action' do
-        let(:task){ RRadio::Task.new ['off'] }
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
+        let(:task){ RRadio::Task.new(['off'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.off }
         end
@@ -179,7 +187,8 @@ describe RRadio::Task do
         end
       end
       describe ':show action' do
-        let(:task){ RRadio::Task.new ['show'] }
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
+        let(:task){ RRadio::Task.new(['show'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.show }
         end

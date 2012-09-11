@@ -8,8 +8,10 @@ module RRadio
   class Task < Thor
 
     def initialize(args, opts={}, conf={})
-      super(args, opts, conf)
-      _setup
+      if conf[:current_task].name != 'help'
+        _setup
+      end
+      super
     end
 
     desc 'list', 'Show bookmarks [synonym: ls]'
@@ -81,9 +83,14 @@ module RRadio
     end
 
     def _init_player
-      @player = @service.object('/net/sourceforge/radiotray')
-      @player.default_iface = 'net.sourceforge.radiotray'
-      @player.introspect
+      begin
+        @player = @service.object('/net/sourceforge/radiotray')
+        @player.default_iface = 'net.sourceforge.radiotray'
+        @player.introspect
+      rescue DBus::Error
+        puts "Please run radiotray :p"
+        exit
+      end
     end
 
     def channels
