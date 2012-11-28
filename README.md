@@ -4,10 +4,11 @@
 
 Simple client of radiotray ♪♪♪
 
+
 ## Install
 
 ```
-$ gem install rradio
+$ gem install rradio (not yet)
 
 or
 
@@ -17,10 +18,12 @@ $ rake build
 $ gem install pkg/rradio-x.x.x.gem
 ```
 
+
 ## Require
 
 * dbus
 * radiotray (runtime)
+
 
 ## Usage
 
@@ -40,8 +43,8 @@ $[04] 80s Sky.FM
 ...
 
 # start to listen
-$ rradio play 01
-.977 The Hitz Channel
+$ rradio play 16
+Groove Salad
 ```
 
 See help.
@@ -56,8 +59,18 @@ Tasks:
   rradio volume {up|down} (1-5)  # Change volume [synonym: vol]
 ```
 
+
+## License
+
+Copyright (c) 2012 Yasuhiro Asaka
+
+MIT License
+
+
 ## Todo
 
-* Add indicator
-* Task for management of bookmarks (add, edit, delete)
+* Add power action (on|off)
+* Add indicator (:play action takes sometimes a few seconds)
+* Create action for management of bookmarks (add, edit, delete)
 * Display current song (possible ??)
+* Raname to greate one :)
