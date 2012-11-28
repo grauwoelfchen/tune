@@ -30,8 +30,9 @@ $ gem install pkg/rradio-x.x.x.gem
 You can specify channel with number index.
 
 ```
-# run radiotray background
-$ radiotray >/dev/null 2>&1 &
+# run radiotray
+$ rradio power on
+on
 
 # list channels
 $ rradio list
