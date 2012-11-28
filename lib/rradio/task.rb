@@ -8,10 +8,31 @@ module RRadio
   class Task < Thor
 
     def initialize(args, opts={}, conf={})
-      if conf[:current_task].name != 'help'
-        _setup
+      unless %w[
+        help power
+      ].include?(conf[:current_task].name)
+        unless connect
+          puts 'please power on ;)'
+          exit
+        end
       end
       super
+    end
+
+    desc 'power {on|off}', 'On/Off radiotray [synonym: po]'
+    map  'po' => :power
+    method_options :action => :string
+    def power action=''
+      res = `ps aux | grep '[r]adiotray'`.empty?
+      on  = "\033[1;32mon\033[1;30m"
+      off = "\033[1;31moff\033[1;30m"
+      case action
+      when /^on$/i
+        res = `radiotray 1>/dev/null 2>&1 &`.nil? unless connect
+      when /^off$/i
+        res = `killall -15 radiotray` if connect
+      end
+      puts (res ? off : on)
     end
 
     desc 'list', 'Show bookmarks [synonym: ls]'
@@ -76,20 +97,28 @@ module RRadio
 
     private
 
-    def _setup
-      @bus = DBus::SessionBus.instance
-      @service = @bus.service('net.sourceforge.radiotray')
-      _init_player
+    def connect
+      (setup and init_player)
     end
 
-    def _init_player
+    def setup
+      begin
+        @bus = DBus::SessionBus.instance
+        @service = @bus.service('net.sourceforge.radiotray')
+        return true
+      rescue DBus::Error, Errno::ECONNREFUSED
+        return false
+      end
+    end
+
+    def init_player
       begin
         @player = @service.object('/net/sourceforge/radiotray')
         @player.default_iface = 'net.sourceforge.radiotray'
         @player.introspect
+        return true
       rescue DBus::Error
-        puts "Please run radiotray :p"
-        exit
+        return false
       end
     end
 

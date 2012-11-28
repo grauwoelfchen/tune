@@ -55,6 +55,7 @@ Tasks:
   rradio list                    # Show bookmarks [synonym: ls]
   rradio off                     # Turn off [synonym: stop]
   rradio play                    # Play radio [synonym: start]
+  rradio power {on|off}          # On/Off radiotray [synonym: po]
   rradio show                    # Show radio channel [synonym: current]
   rradio volume {up|down} (1-5)  # Change volume [synonym: vol]
 ```
@@ -69,7 +70,7 @@ MIT License
 
 ## Todo
 
-* Add power action (on|off)
+* Improve spec description
 * Add indicator (:play action takes sometimes a few seconds)
 * Create action for management of bookmarks (add, edit, delete)
 * Display current song (possible ??)

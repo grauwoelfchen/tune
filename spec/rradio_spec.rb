@@ -17,11 +17,83 @@ module Kernel
     end
     result
   end
+  # for backtick
+  def `(command)
+    return ''
+  end
 end
 
 describe RRadio::Task do
   context 'radiotray process does not exist yet' do
-    # pending
+    describe ':power action with on' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+      let(:task){ RRadio::Task.new(['power'], [], conf)  }
+      before do
+        @stdout = capture(:stdout) {
+          task.should_receive(:'`').with(/ps aux/).once.and_return('')
+          task.should_receive(:'`').with(/radiotray/).once.and_return('done')
+          @result = task.power('on')
+        }
+      end
+      it 'should on power' do
+        @stdout.chomp.should match(/on/)
+      end
+    end
+    describe ':power action with off' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+      let(:task){ RRadio::Task.new(['power'], [], conf)  }
+      before do
+        @stdout = capture(:stdout) {
+          task.should_receive(:'`').with(/ps aux/).once.and_return('')
+          task.should_not_receive(:'`').with(/radiotray/).never
+          task.should_not_receive(:'`').with(/killall/).never
+          @result = task.power('off')
+        }
+      end
+      it 'should not change state off' do
+        @stdout.chomp.should match(/off/)
+      end
+    end
+    describe ':list action' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
+      it 'should raise SystemExit at initialize' do
+        lambda {
+          capture(:stdout){ RRadio::Task.new(['list'], [], conf) }
+        }.should raise_error(SystemExit)
+      end
+    end
+    describe ':play action' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+      it 'should raise SystemExit at initialize' do
+        lambda {
+          capture(:stdout){ RRadio::Task.new(['play'], [], conf) }
+        }.should raise_error(SystemExit)
+      end
+    end
+    describe ':off action' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
+      it 'should raise SystemExit at initialize' do
+        lambda {
+          capture(:stdout){ RRadio::Task.new(['off'], [], conf) }
+        }.should raise_error(SystemExit)
+      end
+    end
+    describe ':show action' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
+      it 'should raise SystemExit at initialize' do
+        lambda {
+          capture(:stdout){ RRadio::Task.new(['show'], [], conf) }
+        }.should raise_error(SystemExit)
+      end
+    end
+    describe ':volume action' do
+      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
+      it 'should raise SystemExit at initialize' do
+        lambda {
+          capture(:stdout){ RRadio::Task.new(['volume'], [], conf) }
+        }.should raise_error(SystemExit)
+      end
+    end
   end
   context 'radiotray process is already started' do
     before do
@@ -46,6 +118,37 @@ describe RRadio::Task do
           'R&B',    # $[02]
           'Country' # $[03]
         ]])
+      end
+      describe ':power action with on' do
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+        let(:task){ RRadio::Task.new(['power'], [], conf)  }
+        before do
+          @stdout = capture(:stdout) {
+            task.should_receive(:'`').with(/ps aux/).once.and_return(
+              'user 99999 0.0 0.0 99999 999 pts/0   S+ 00:00 /usr/bin/pytho2.7 /usr/bin/radiotray'
+            )
+            @result = task.power('on')
+          }
+        end
+        it 'should not change state on' do
+          @stdout.chomp.should match(/on/)
+        end
+      end
+      describe ':power action with off' do
+        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+        let(:task){ RRadio::Task.new(['power'], [], conf)  }
+        before do
+          @stdout = capture(:stdout) {
+            task.should_receive(:'`').with(/ps aux/).once.and_return(
+              'user 99999 0.0 0.0 99999 999 pts/0   S+ 00:00 /usr/bin/pytho2.7 /usr/bin/radiotray'
+            )
+            task.should_receive(:'`').with(/killall/).once.and_return('done')
+            @result = task.power('off')
+          }
+        end
+        it 'should off power' do
+          @stdout.chomp.should match(/off/)
+        end
       end
       describe ':list action' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
