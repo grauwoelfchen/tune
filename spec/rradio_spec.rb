@@ -105,6 +105,7 @@ describe RRadio::Task do
       end
     end
   end
+
   context 'radiotray process is already started' do
     before do
       @player = double('player')
@@ -116,12 +117,9 @@ describe RRadio::Task do
       @dbus.stub(:service).with('net.sourceforge.radiotray').and_return(@service)
       DBus::SessionBus.stub(:instance).and_return(@dbus)
     end
+
     context 'when playing Jazz channel' do
       before do
-        @player.stub(:turnOff).and_return(true)
-        @player.stub(:volumeUp).and_return(true)
-        @player.stub(:volumeDown).and_return(true)
-        @player.stub(:playRadio).with(/Jazz|R&B/)
         @player.stub(:getCurrentRadio).and_return(['Jazz'])
         @player.stub(:listRadios).and_return([[
           'Jazz',   # $[01]
@@ -183,6 +181,7 @@ describe RRadio::Task do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
         let(:task){ RRadio::Task.new(['play'], [], conf) }
         before do
+          @player.stub(:playRadio).with(/Jazz|R&B/)
           @stdout = capture(:stdout){ @result = task.play('05') }
         end
         it 'should display error' do
@@ -198,6 +197,7 @@ describe RRadio::Task do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
         let(:task){ RRadio::Task.new(['play'], [], conf) }
         before do
+          @player.stub(:playRadio).with(/Jazz|R&B/)
           @stdout = capture(:stdout){ @result = task.play }
         end
         it 'should display current channel' do
@@ -213,6 +213,7 @@ describe RRadio::Task do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
         let(:task){ RRadio::Task.new(['play'], [], conf) }
         before do
+          @player.stub(:playRadio).with(/Jazz|R&B/)
           @stdout = capture(:stdout){ @result = task.play('02') }
         end
         it 'should display switched new channel' do
@@ -228,6 +229,7 @@ describe RRadio::Task do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
         let(:task){ RRadio::Task.new(['off'], [], conf) }
         before do
+          @player.stub(:turnOff).and_return(true)
           @stdout = capture(:stdout){ @result = task.off }
         end
         it 'should display stoped channel' do
@@ -257,6 +259,10 @@ describe RRadio::Task do
       describe ':volume action with invalid value' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
         let(:task){ RRadio::Task.new(['volume'], [], conf) }
+        before do
+          @player.stub(:volumeUp).and_return(true)
+          @player.stub(:volumeDown).and_return(true)
+        end
         it 'should up volume as 5 with too big value' do
           task.volume('up', '99').should eq 5
         end
@@ -270,6 +276,10 @@ describe RRadio::Task do
       describe ':volume action with valid value' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
         let(:task){ RRadio::Task.new(['volume'], [], conf) }
+        before do
+          @player.stub(:volumeUp).and_return(true)
+          @player.stub(:volumeDown).and_return(true)
+        end
         it 'should up volume' do
           task.volume('up', '1').should eq 1
           task.volume('up', '3').should eq 3
