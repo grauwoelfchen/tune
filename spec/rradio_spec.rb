@@ -26,11 +26,6 @@ end
 describe RRadio::Task do
   context 'radiotray process does not exist yet' do
     before do
-      @player = double('player')
-      @player.stub(:default_iface=).with('net.sourceforge.radiotray').and_return(false)
-      @player.stub(:introspect).and_raise(DBus::Error)
-      @service = double('service')
-      @service.stub(:object).with('/net/sourceforge/radiotray').and_return(@player)
       @dbus = mock(DBus::SessionBus)
       @dbus.stub(:service).with('net.sourceforge.radiotray').and_raise(Errno::ECONNREFUSED)
       DBus::SessionBus.stub(:instance).and_return(@dbus)
