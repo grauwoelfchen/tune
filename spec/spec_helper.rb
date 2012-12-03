@@ -8,7 +8,7 @@
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 $:.unshift File.dirname(__FILE__)
 require 'rspec'
-require 'rradio'
+require 'tune'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

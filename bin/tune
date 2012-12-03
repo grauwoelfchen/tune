@@ -7,6 +7,6 @@ require 'pathname'
 root = Pathname.new(__FILE__).realpath.parent.parent
 $:.unshift root.join('lib') if $0 == __FILE__
 
-require 'rradio'
+require 'tune'
 
-RRadio::Task.start ARGV
+Tune::Task.start ARGV

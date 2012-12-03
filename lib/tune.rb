@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'rradio/task'
+require 'tune/task'
 
 # NOTE
 # $ dbus-send --help
@@ -15,5 +15,5 @@ require 'rradio/task'
 #   * volumeUp
 #   * playUrl
 #   * getCurrentRadio
-module RRadio
+module Tune
 end

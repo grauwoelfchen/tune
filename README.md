@@ -1,21 +1,23 @@
-# rradio
+# tune
 
-[![Build Status](https://secure.travis-ci.org/grauwoelfchen/rradio.png)](http://travis-ci.org/grauwoelfchen/rradio)
+[![Build Status](https://secure.travis-ci.org/grauwoelfchen/tune.png)](http://travis-ci.org/grauwoelfchen/tune)
 
-Simple client of radiotray ♪♪♪
+Simple controller for Radio Tray ♪♪♪
+
+* [Radio Tray](http://radiotray.sourceforge.net/)
 
 
 ## Install
 
 ```
-$ gem install rradio (not yet)
+$ gem install tune (not yet)
 
 or
 
-$ git clone https://github.com/grauwoelfchen/rradio.git
-$ cd rradio
+$ git clone https://github.com/grauwoelfchen/tune.git
+$ cd tune
 $ rake build
-$ gem install pkg/rradio-x.x.x.gem
+$ gem install pkg/tune-x.x.x.gem
 ```
 
 
@@ -31,11 +33,11 @@ You can specify channel with number index.
 
 ```
 # run radiotray
-$ rradio power on
+$ tune power on
 on
 
 # list channels
-$ rradio list
+$ tune list
 $[00] .977 Classic Rock
 $[01] .977 The Hitz Channel
 $[02] 181.FM
@@ -44,7 +46,7 @@ $[04] 80s Sky.FM
 ...
 
 # start to listen
-$ rradio play 16
+$ tune play 16
 Groove Salad
 ```
 
@@ -52,13 +54,13 @@ See help.
 
 ```
 Tasks:
-  rradio help [TASK]             # Describe available tasks or one specific task
-  rradio list                    # Show bookmarks [synonym: ls]
-  rradio off                     # Turn off [synonym: stop]
-  rradio play                    # Play radio [synonym: start]
-  rradio power {on|off}          # On/Off radiotray [synonym: po]
-  rradio show                    # Show radio channel [synonym: current]
-  rradio volume {up|down} (1-5)  # Change volume [synonym: vol]
+  tune help [TASK]             # Describe available tasks or one specific task
+  tune list                    # Show bookmarks [synonym: ls]
+  tune off                     # Turn off [synonym: stop]
+  tune play                    # Play radio [synonym: start]
+  tune power {on|off}          # On/Off radiotray [synonym: po]
+  tune show                    # Show radio channel [synonym: current]
+  tune volume {up|down} (1-5)  # Change volume [synonym: vol]
 ```
 
 
@@ -75,4 +77,3 @@ MIT License
 * Add indicator (:play action takes sometimes a few seconds)
 * Create action for management of bookmarks (add, edit, delete)
 * Display current song (possible ??)
-* Raname to greate one :)

@@ -1,19 +1,19 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/rradio/version', __FILE__)
+require File.expand_path('../lib/tune/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Yasuhiro Asaka"]
-  gem.email         = ["y.grauwoelfchen@gmail.com"]
-  gem.description   = %q{rradio is command line interface of radiotray via dbus}
-  gem.summary       = %q{rradio includes wrapper commands of radiotray}
+  gem.email         = ["grauwoelfchen@gmail.com"]
+  gem.description   = %q{tune is a command line interface of Radio Tray via dbus}
+  gem.summary       = %q{tune is a small controller for Radio Tray}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "rradio"
+  gem.name          = "tune"
   gem.require_paths = ["lib"]
-  gem.version       = RRadio::VERSION
+  gem.version       = Tune::VERSION
 
   gem.add_dependency 'ruby-dbus'
   gem.add_dependency 'thor'

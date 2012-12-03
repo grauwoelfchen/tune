@@ -4,7 +4,7 @@ require 'rubygems' if RUBY_VERSION.to_f < 1.9
 require 'thor'
 require 'dbus'
 
-module RRadio
+module Tune
   class Task < Thor
 
     def initialize(args, opts={}, conf={})

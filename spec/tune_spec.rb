@@ -23,7 +23,7 @@ module Kernel
   end
 end
 
-describe RRadio::Task do
+describe Tune::Task do
   context 'radiotray process does not exist yet' do
     before do
       @dbus = mock(DBus::SessionBus)
@@ -32,7 +32,7 @@ describe RRadio::Task do
     end
     describe ':power action with on' do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
-      let(:task){ RRadio::Task.new(['power'], [], conf)  }
+      let(:task){ Tune::Task.new(['power'], [], conf)  }
       before do
         @stdout = capture(:stdout) {
           task.should_receive(:'`').with(/ps aux/).once.and_return('')
@@ -46,7 +46,7 @@ describe RRadio::Task do
     end
     describe ':power action with off' do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
-      let(:task){ RRadio::Task.new(['power'], [], conf)  }
+      let(:task){ Tune::Task.new(['power'], [], conf)  }
       before do
         @stdout = capture(:stdout) {
           task.should_receive(:'`').with(/ps aux/).once.and_return('')
@@ -63,7 +63,7 @@ describe RRadio::Task do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
       it 'should raise SystemExit at initialize' do
         lambda {
-          capture(:stdout){ RRadio::Task.new(['list'], [], conf) }
+          capture(:stdout){ Tune::Task.new(['list'], [], conf) }
         }.should raise_error(SystemExit)
       end
     end
@@ -71,7 +71,7 @@ describe RRadio::Task do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
       it 'should raise SystemExit at initialize' do
         lambda {
-          capture(:stdout){ RRadio::Task.new(['play'], [], conf) }
+          capture(:stdout){ Tune::Task.new(['play'], [], conf) }
         }.should raise_error(SystemExit)
       end
     end
@@ -79,7 +79,7 @@ describe RRadio::Task do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
       it 'should raise SystemExit at initialize' do
         lambda {
-          capture(:stdout){ RRadio::Task.new(['off'], [], conf) }
+          capture(:stdout){ Tune::Task.new(['off'], [], conf) }
         }.should raise_error(SystemExit)
       end
     end
@@ -87,7 +87,7 @@ describe RRadio::Task do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
       it 'should raise SystemExit at initialize' do
         lambda {
-          capture(:stdout){ RRadio::Task.new(['show'], [], conf) }
+          capture(:stdout){ Tune::Task.new(['show'], [], conf) }
         }.should raise_error(SystemExit)
       end
     end
@@ -95,7 +95,7 @@ describe RRadio::Task do
       let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
       it 'should raise SystemExit at initialize' do
         lambda {
-          capture(:stdout){ RRadio::Task.new(['volume'], [], conf) }
+          capture(:stdout){ Tune::Task.new(['volume'], [], conf) }
         }.should raise_error(SystemExit)
       end
     end
@@ -124,7 +124,7 @@ describe RRadio::Task do
       end
       describe ':power action with on' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
-        let(:task){ RRadio::Task.new(['power'], [], conf)  }
+        let(:task){ Tune::Task.new(['power'], [], conf)  }
         before do
           @stdout = capture(:stdout) {
             task.should_receive(:'`').with(/ps aux/).once.and_return(
@@ -139,7 +139,7 @@ describe RRadio::Task do
       end
       describe ':power action with off' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
-        let(:task){ RRadio::Task.new(['power'], [], conf)  }
+        let(:task){ Tune::Task.new(['power'], [], conf)  }
         before do
           @stdout = capture(:stdout) {
             task.should_receive(:'`').with(/ps aux/).once.and_return(
@@ -155,7 +155,7 @@ describe RRadio::Task do
       end
       describe ':list action' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
-        let(:task){ RRadio::Task.new(['list'], [], conf)  }
+        let(:task){ Tune::Task.new(['list'], [], conf)  }
         before do
           @stdout = capture(:stdout){ @result = task.list }
         end
@@ -174,7 +174,7 @@ describe RRadio::Task do
       end
       describe ':play action with invalid index' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
-        let(:task){ RRadio::Task.new(['play'], [], conf) }
+        let(:task){ Tune::Task.new(['play'], [], conf) }
         before do
           @player.stub(:playRadio).with(/Jazz|R&B/)
           @stdout = capture(:stdout){ @result = task.play('05') }
@@ -190,7 +190,7 @@ describe RRadio::Task do
       end
       describe ':play action with any args' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
-        let(:task){ RRadio::Task.new(['play'], [], conf) }
+        let(:task){ Tune::Task.new(['play'], [], conf) }
         before do
           @player.stub(:playRadio).with(/Jazz|R&B/)
           @stdout = capture(:stdout){ @result = task.play }
@@ -206,7 +206,7 @@ describe RRadio::Task do
       end
       describe ':play action with other channel' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
-        let(:task){ RRadio::Task.new(['play'], [], conf) }
+        let(:task){ Tune::Task.new(['play'], [], conf) }
         before do
           @player.stub(:playRadio).with(/Jazz|R&B/)
           @stdout = capture(:stdout){ @result = task.play('02') }
@@ -222,7 +222,7 @@ describe RRadio::Task do
       end
       describe ':off action' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
-        let(:task){ RRadio::Task.new(['off'], [], conf) }
+        let(:task){ Tune::Task.new(['off'], [], conf) }
         before do
           @player.stub(:turnOff).and_return(true)
           @stdout = capture(:stdout){ @result = task.off }
@@ -238,7 +238,7 @@ describe RRadio::Task do
       end
       describe ':show action' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
-        let(:task){ RRadio::Task.new(['show'], [], conf) }
+        let(:task){ Tune::Task.new(['show'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.show }
         end
@@ -253,7 +253,7 @@ describe RRadio::Task do
       end
       describe ':volume action with invalid value' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
-        let(:task){ RRadio::Task.new(['volume'], [], conf) }
+        let(:task){ Tune::Task.new(['volume'], [], conf) }
         before do
           @player.stub(:volumeUp).and_return(true)
           @player.stub(:volumeDown).and_return(true)
@@ -270,7 +270,7 @@ describe RRadio::Task do
       end
       describe ':volume action with valid value' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
-        let(:task){ RRadio::Task.new(['volume'], [], conf) }
+        let(:task){ Tune::Task.new(['volume'], [], conf) }
         before do
           @player.stub(:volumeUp).and_return(true)
           @player.stub(:volumeDown).and_return(true)
@@ -293,7 +293,7 @@ describe RRadio::Task do
       end
       describe ':off action' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
-        let(:task){ RRadio::Task.new(['off'], [], conf) }
+        let(:task){ Tune::Task.new(['off'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.off }
         end
@@ -308,7 +308,7 @@ describe RRadio::Task do
       end
       describe ':show action' do
         let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
-        let(:task){ RRadio::Task.new(['show'], [], conf) }
+        let(:task){ Tune::Task.new(['show'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.show }
         end
