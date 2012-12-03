@@ -261,9 +261,9 @@ describe RRadio::Task do
           task.volume('up', '99').should eq 5
         end
         it 'should down volume as 5 with too big value' do
-          task.volume('up', '99').should eq 5
+          task.volume('down', '99').should eq 5
         end
-        it 'should not respond with invalid action' do
+        it 'should not respond with invalid direction' do
           task.volume('keep', '5').should eq nil
         end
       end
@@ -275,8 +275,8 @@ describe RRadio::Task do
           task.volume('up', '3').should eq 3
         end
         it 'should down volume' do
-          task.volume('up', '2').should eq 2
-          task.volume('up', '4').should eq 4
+          task.volume('down', '2').should eq 2
+          task.volume('down', '4').should eq 4
         end
       end
     end
