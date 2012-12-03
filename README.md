@@ -10,7 +10,7 @@ Simple controller for Radio Tray ♪♪♪
 ## Install
 
 ```
-$ gem install tune (not yet)
+$ gem install tune
 
 or
 
@@ -69,6 +69,12 @@ Tasks:
 Copyright (c) 2012 Yasuhiro Asaka
 
 MIT License
+
+
+## Change Log
+
+* 2012.12.04, 0.0.2 Updated README :p
+* 2012.12.04, 0.0.1 Released as gem !
 
 
 ## Todo
