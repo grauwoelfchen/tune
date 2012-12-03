@@ -24,8 +24,8 @@ module RRadio
     method_options :action => :string
     def power action=''
       res = `ps aux | grep '[r]adiotray'`.empty?
-      on  = "\033[1;32mon\033[1;30m"
-      off = "\033[1;31moff\033[1;30m"
+      on  = "\033[1;32mon\033[m"
+      off = "\033[1;31moff\033[m"
       case action
       when /^on$/i
         res = `radiotray 1>/dev/null 2>&1 &`.nil? unless connect
@@ -43,9 +43,9 @@ module RRadio
       all_names.each_with_index do |channel, index|
         var = index.to_s.rjust var_width, '0'
         if channel == playing
-          puts "\033[1;30m$\[#{var}\] \033[1;31m#{channel}"
+          puts "\033[1;30m$\[#{var}\] \033[1;31m#{channel}\033[m"
         else
-          puts "\033[1;30m$\[#{var}\] \033[1;34m#{channel}"
+          puts "\033[1;30m$\[#{var}\] \033[1;34m#{channel}\033[m"
         end
       end
     end
