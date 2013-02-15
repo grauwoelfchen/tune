@@ -1,3 +1,0 @@
-module Autotest::Stumpish
-  @title = File.basename(File.dirname(__FILE__)).upcase + ': '
-end
