@@ -7,7 +7,7 @@ Simple controller for Radio Tray ♪♪♪
 * [Radio Tray](http://radiotray.sourceforge.net/)
 
 
-## Install
+## Installation
 
 ```
 $ gem install tune
@@ -21,7 +21,7 @@ $ gem install pkg/tune-x.x.x.gem
 ```
 
 
-## Require
+## Requirements
 
 * dbus
 * radiotray (runtime)
