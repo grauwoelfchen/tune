@@ -1,5 +1,5 @@
 Gemfile.lock
 .bundle*
-.rbenv-version
+.ruby-version
 .autotest
 pkg
