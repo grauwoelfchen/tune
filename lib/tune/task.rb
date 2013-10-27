@@ -23,15 +23,16 @@ module Tune
     map  'po' => :power
     method_options :action => :string
     def power action=''
-      res = `ps aux | grep '[r]adiotray'`.empty?
-      on  = "\033[1;32mon\033[m"
-      off = "\033[1;31moff\033[m"
+      pid = `ps aux | grep '[r]adiotray' | awk '{print $2}'`
+      res = pid.empty?
       case action
       when /^on$/i
         res = `radiotray 1>/dev/null 2>&1 &`.nil? unless connect
       when /^off$/i
-        res = `killall -15 radiotray` if connect
+        res = `kill -15 #{pid}` if connect
       end
+      on  = "\033[1;32mon\033[m"
+      off = "\033[1;31moff\033[m"
       puts (res ? off : on)
     end
 
