@@ -3,9 +3,10 @@ rvm:
   - 1.8.7
   - 1.9.2
   - 1.9.3
+  - 2.0.0
 notifications:
   email:
     recipients:
-      - y.grauwoelfchen@gmail.com
+      - grauwoelfchen@gmail.com
     on_success: change
     on_failure: always
