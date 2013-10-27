@@ -73,6 +73,8 @@ MIT License
 
 ## Change Log
 
+* 2013.10.28, 0.0.4 Updated `power off` to kill process via pid (tested with ruby-1.9.3-p448, ruby-2.0.0-p247)
+                    Specified rspec version for travis (as 2.12.0)
 * 2013.02.15, 0.0.3 Removed unused gems and files (tested with ruby-1.9.3-p385)
 * 2012.12.04, 0.0.2 Updated README :p
 * 2012.12.04, 0.0.1 Released as gem !
