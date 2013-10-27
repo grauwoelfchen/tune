@@ -51,7 +51,7 @@ describe Tune::Task do
         @stdout = capture(:stdout) {
           task.should_receive(:'`').with(/ps aux/).once.and_return('')
           task.should_not_receive(:'`').with(/radiotray/).never
-          task.should_not_receive(:'`').with(/killall/).never
+          task.should_not_receive(:'`').with(/kill/).never
           @result = task.power('off')
         }
       end
@@ -128,7 +128,7 @@ describe Tune::Task do
         before do
           @stdout = capture(:stdout) {
             task.should_receive(:'`').with(/ps aux/).once.and_return(
-              'user 99999 0.0 0.0 99999 999 pts/0   S+ 00:00 /usr/bin/pytho2.7 /usr/bin/radiotray'
+              'user 99999 0.0 0.0 99999 999 pts/0   S+ 00:00 /usr/bin/pytho2.7 /usr/bin/radiotray-python2.7'
             )
             @result = task.power('on')
           }
@@ -143,9 +143,9 @@ describe Tune::Task do
         before do
           @stdout = capture(:stdout) {
             task.should_receive(:'`').with(/ps aux/).once.and_return(
-              'user 99999 0.0 0.0 99999 999 pts/0   S+ 00:00 /usr/bin/pytho2.7 /usr/bin/radiotray'
+              'user 99999 0.0 0.0 99999 999 pts/0   S+ 00:00 /usr/bin/pytho2.7 /usr/bin/radiotray-python2.7'
             )
-            task.should_receive(:'`').with(/killall/).once.and_return('done')
+            task.should_receive(:'`').with(/kill/).once.and_return('done')
             @result = task.power('off')
           }
         end
