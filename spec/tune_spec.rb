@@ -31,7 +31,7 @@ describe Tune::Task do
       DBus::SessionBus.stub(:instance).and_return(@dbus)
     end
     describe ':power action with on' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'power')} }
       let(:task){ Tune::Task.new(['power'], [], conf)  }
       before do
         @stdout = capture(:stdout) {
@@ -45,7 +45,7 @@ describe Tune::Task do
       end
     end
     describe ':power action with off' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'power')} }
       let(:task){ Tune::Task.new(['power'], [], conf)  }
       before do
         @stdout = capture(:stdout) {
@@ -60,7 +60,7 @@ describe Tune::Task do
       end
     end
     describe ':list action' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'list')} }
       it 'should raise SystemExit at initialize' do
         lambda {
           capture(:stdout){ Tune::Task.new(['list'], [], conf) }
@@ -68,7 +68,7 @@ describe Tune::Task do
       end
     end
     describe ':play action' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'play')} }
       it 'should raise SystemExit at initialize' do
         lambda {
           capture(:stdout){ Tune::Task.new(['play'], [], conf) }
@@ -76,7 +76,7 @@ describe Tune::Task do
       end
     end
     describe ':off action' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'off')} }
       it 'should raise SystemExit at initialize' do
         lambda {
           capture(:stdout){ Tune::Task.new(['off'], [], conf) }
@@ -84,7 +84,7 @@ describe Tune::Task do
       end
     end
     describe ':show action' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'show')} }
       it 'should raise SystemExit at initialize' do
         lambda {
           capture(:stdout){ Tune::Task.new(['show'], [], conf) }
@@ -92,7 +92,7 @@ describe Tune::Task do
       end
     end
     describe ':volume action' do
-      let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
+      let(:conf){ {:current_command =>  OpenStruct.new(:name => 'volume')} }
       it 'should raise SystemExit at initialize' do
         lambda {
           capture(:stdout){ Tune::Task.new(['volume'], [], conf) }
@@ -123,7 +123,7 @@ describe Tune::Task do
         ]])
       end
       describe ':power action with on' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'power')} }
         let(:task){ Tune::Task.new(['power'], [], conf)  }
         before do
           @stdout = capture(:stdout) {
@@ -138,7 +138,7 @@ describe Tune::Task do
         end
       end
       describe ':power action with off' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'power')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'power')} }
         let(:task){ Tune::Task.new(['power'], [], conf)  }
         before do
           @stdout = capture(:stdout) {
@@ -154,7 +154,7 @@ describe Tune::Task do
         end
       end
       describe ':list action' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'list')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'list')} }
         let(:task){ Tune::Task.new(['list'], [], conf)  }
         before do
           @stdout = capture(:stdout){ @result = task.list }
@@ -173,7 +173,7 @@ describe Tune::Task do
         end
       end
       describe ':play action with invalid index' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'play')} }
         let(:task){ Tune::Task.new(['play'], [], conf) }
         before do
           @player.stub(:playRadio).with(/Jazz|R&B/)
@@ -189,7 +189,7 @@ describe Tune::Task do
         end
       end
       describe ':play action with any args' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'play')} }
         let(:task){ Tune::Task.new(['play'], [], conf) }
         before do
           @player.stub(:playRadio).with(/Jazz|R&B/)
@@ -205,7 +205,7 @@ describe Tune::Task do
         end
       end
       describe ':play action with other channel' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'play')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'play')} }
         let(:task){ Tune::Task.new(['play'], [], conf) }
         before do
           @player.stub(:playRadio).with(/Jazz|R&B/)
@@ -221,7 +221,7 @@ describe Tune::Task do
         end
       end
       describe ':off action' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'off')} }
         let(:task){ Tune::Task.new(['off'], [], conf) }
         before do
           @player.stub(:turnOff).and_return(true)
@@ -237,7 +237,7 @@ describe Tune::Task do
         end
       end
       describe ':show action' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'show')} }
         let(:task){ Tune::Task.new(['show'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.show }
@@ -252,7 +252,7 @@ describe Tune::Task do
         end
       end
       describe ':volume action with invalid value' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'volume')} }
         let(:task){ Tune::Task.new(['volume'], [], conf) }
         before do
           @player.stub(:volumeUp).and_return(true)
@@ -269,7 +269,7 @@ describe Tune::Task do
         end
       end
       describe ':volume action with valid value' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'volume')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'volume')} }
         let(:task){ Tune::Task.new(['volume'], [], conf) }
         before do
           @player.stub(:volumeUp).and_return(true)
@@ -292,7 +292,7 @@ describe Tune::Task do
         @player.stub(:turnOff).and_return(nil)
       end
       describe ':off action' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'off')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'off')} }
         let(:task){ Tune::Task.new(['off'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.off }
@@ -307,7 +307,7 @@ describe Tune::Task do
         end
       end
       describe ':show action' do
-        let(:conf){ {:current_task =>  OpenStruct.new(:name => 'show')} }
+        let(:conf){ {:current_command =>  OpenStruct.new(:name => 'show')} }
         let(:task){ Tune::Task.new(['show'], [], conf) }
         before do
           @stdout = capture(:stdout){ @result = task.show }
