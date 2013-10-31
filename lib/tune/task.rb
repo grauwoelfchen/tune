@@ -10,7 +10,7 @@ module Tune
     def initialize(args, opts={}, conf={})
       unless %w[
         help power
-      ].include?(conf[:current_task].name)
+      ].include?(conf[:current_command].name)
         unless connect
           puts 'please power on ;)'
           exit

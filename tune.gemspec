@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = Tune::VERSION
 
   gem.add_dependency 'ruby-dbus'
-  gem.add_dependency 'thor'
+  gem.add_dependency 'thor', '~> 0.18.1'
 
   gem.add_development_dependency 'rspec', '~> 2.12.0'
 
