@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{tune is a command line interface of Radio Tray via dbus}
   gem.summary       = %q{tune is a small controller for Radio Tray}
   gem.homepage      = "https://github.com/grauwoelfchen/tune"
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
