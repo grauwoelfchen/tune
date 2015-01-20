@@ -10,3 +10,9 @@ notifications:
       - grauwoelfchen@gmail.com
     on_success: change
     on_failure: always
+gemfiles:
+  - gemfiles/0.0.5.gemfile
+  - gemfiles/0.0.6.gemfile
+matrix:
+  allow_failures:
+    - rvm: 1.8.7

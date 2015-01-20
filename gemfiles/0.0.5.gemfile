@@ -1,0 +1,12 @@
+soruce "https://rubygems.org"
+
+gem "ruby-dbus", "~> 0.9.3"
+gem "thor", "~> 0.18.1"
+
+gem "tune", :path => "../"
+
+group :development, :test do
+  gem "rspec", "~> 2.12.0"
+end
+
+gemspec :path => "../"

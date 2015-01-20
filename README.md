@@ -74,6 +74,7 @@ MIT License
 ## Change Log
 
 * 2015.01.21, 0.0.6 Add 2.1.5 travis ruby test target. Add LICENSE into gemspec.
+                    Add gemfiles.
 * 2013.11.01, 0.0.5 Update task to be suitable for thor ~> 0.18.1
 * 2013.10.28, 0.0.4 Updated `power off` to kill process via pid (tested with ruby-1.9.3-p448, ruby-2.0.0-p247)
                     Specified rspec version for travis (as 2.12.0)
