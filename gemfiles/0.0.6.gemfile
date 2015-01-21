@@ -1,4 +1,4 @@
-soruce "https://rubygems.org"
+source "https://rubygems.org"
 
 gem "ruby-dbus"
 gem "thor", "~> 0.18.1"
